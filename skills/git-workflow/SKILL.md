@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: "Workflow Git professionnel, branching strategies, commit conventions, et collaboration d'équipe."
+description: "Workflow Git professionnel, branching strategies, commit conventions, et collaboration d'équipe. Use when creating branches, writing or fixing commits, rebasing, resolving merge conflicts, reviewing pull requests, or when the user mentions git, branche, commit, merge, rebase ou convention de commit."
 version: 1.0.0
 tags: [git, workflow, branching, commits, collaboration]
 ---

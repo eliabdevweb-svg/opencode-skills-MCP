@@ -1,3 +1,8 @@
+---
+name: design-system-shadcn
+description: "Design system base sur shadcn/ui et Radix UI. Use when building or extending a shadcn/ui-based design system, component library, or theme configuration."
+---
+
 # Design System with shadcn/ui Skill
 
 ## Overview
@@ -8,23 +13,23 @@ Expert in building scalable design systems using shadcn/ui, Radix UI, and Tailwi
 ### 1. Component Layers
 ```
 components/
-├── ui/                    # Layer 1: shadcn primitives (DON'T EDIT)
-│   ├── button.tsx
-│   ├── input.tsx
-│   ├── dialog.tsx
-│   └── ...
-├── primitives/            # Layer 2: Your wrappers (shared)
-│   ├── AppButton.tsx
-│   ├── AppInput.tsx
-│   └── AppDialog.tsx
-└── blocks/                # Layer 3: Feature compositions
-    ├── auth-form.tsx
-    ├── pricing-card.tsx
-    └── dashboard-header.tsx
+â”œâ”€â”€ ui/                    # Layer 1: shadcn primitives (DON'T EDIT)
+â”‚   â”œâ”€â”€ button.tsx
+â”‚   â”œâ”€â”€ input.tsx
+â”‚   â”œâ”€â”€ dialog.tsx
+â”‚   â””â”€â”€ ...
+â”œâ”€â”€ primitives/            # Layer 2: Your wrappers (shared)
+â”‚   â”œâ”€â”€ AppButton.tsx
+â”‚   â”œâ”€â”€ AppInput.tsx
+â”‚   â””â”€â”€ AppDialog.tsx
+â””â”€â”€ blocks/                # Layer 3: Feature compositions
+    â”œâ”€â”€ auth-form.tsx
+    â”œâ”€â”€ pricing-card.tsx
+    â””â”€â”€ dashboard-header.tsx
 ```
 
 **Import Rules:**
-- App code → Layer 2/3 only
+- App code â†’ Layer 2/3 only
 - Never import from `components/ui/` directly
 - Enforce with ESLint: `no-restricted-imports`
 
@@ -309,7 +314,7 @@ describe('Button', () => {
 
 - [ ] shadcn/ui initialized with CSS variable theme
 - [ ] cn() utility configured
-- [ ] Components organized: ui/ → primitives/ → blocks/
+- [ ] Components organized: ui/ â†’ primitives/ â†’ blocks/
 - [ ] ESLint rule blocks direct ui/ imports
 - [ ] Design tokens in globals.css
 - [ ] All components wrapped in Layer 2
@@ -319,9 +324,9 @@ describe('Button', () => {
 - [ ] Visual regression tests (optional)
 
 ## Common Mistakes
-- ❌ Editing `components/ui/*` directly
-- ❌ Using className without cn()
-- ❌ Overriding Radix accessibility attributes
-- ❌ Importing from ui/ in app code
-- ❌ Not forwarding refs
-- ❌ Adding business logic to primitives
+- âŒ Editing `components/ui/*` directly
+- âŒ Using className without cn()
+- âŒ Overriding Radix accessibility attributes
+- âŒ Importing from ui/ in app code
+- âŒ Not forwarding refs
+- âŒ Adding business logic to primitives

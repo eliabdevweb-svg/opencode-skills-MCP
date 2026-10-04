@@ -1,6 +1,6 @@
 ---
 name: coding-standards
-description: "Standards de codage professionnels, bonnes pratiques, clean code, et conventions pour un code maintenable et scalable."
+description: "Standards de codage professionnels, bonnes pratiques, clean code, et conventions pour un code maintenable et scalable. Use when reviewing code style, applying clean code rules, naming and formatting conventions, refactoring for readability, or when the user asks about coding standards, linting, bonnes pratiques ou conventions de code."
 version: 1.0.0
 tags: [coding, standards, clean-code, best-practices, quality]
 ---

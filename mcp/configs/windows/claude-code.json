@@ -1,0 +1,32 @@
+{
+  "_note": "A MERGER dans ~/.claude.json sous la cle existante \"mcpServers\". Ne remplacez pas tout le fichier.",
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@playwright/mcp",
+        "--browser",
+        "chrome",
+        "--caps",
+        "vision,devtools",
+        "--allow-unrestricted-file-access"
+      ],
+      "env": {}
+    },
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "env": {}
+    }
+  }
+}

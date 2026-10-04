@@ -1,6 +1,6 @@
 ---
 name: performance
-description: "Optimisation des performances web, Core Web Vitals, bundle analysis, caching, et monitoring."
+description: "Optimisation des performances web, Core Web Vitals, bundle analysis, caching, et monitoring. Use when measuring or improving Core Web Vitals, LCP CLS INP, bundle size, caching, lazy loading or render performance, or when the user says lent, perf, performance, charger plus vite ou optimisation."
 version: 1.0.0
 tags: [performance, optimization, core-web-vitals, caching, monitoring]
 ---

@@ -1,3 +1,8 @@
+---
+name: form-design
+description: "Conception de formulaires accessibles: validation, erreurs, progressive disclosure, wizards etapes. Use when building forms, validation flows, or improving form UX."
+---
+
 # Form Design Skill
 
 ## Overview

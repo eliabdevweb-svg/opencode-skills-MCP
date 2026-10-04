@@ -1,6 +1,6 @@
 ---
 name: testing
-description: "Stratégies de test, TDD, tests unitaires, d'intégration, E2E, et couverture de code."
+description: "Stratégies de test, TDD, tests unitaires, d'intégration, E2E, et couverture de code. Use when writing or fixing unit, integration or E2E tests, choosing a test strategy, setting up TDD, mocks, fixtures or coverage, or when the user says test, tester, couverture, TDD, jest, vitest ou playwright."
 version: 1.0.0
 tags: [testing, tdd, vitest, jest, playwright, e2e]
 ---

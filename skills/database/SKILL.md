@@ -1,3 +1,8 @@
+---
+name: database
+description: "Conception et optimisation de bases de donnees: modelisation, index, migrations, ORM, SQL et NoSQL. Use when designing schemas, writing queries, choosing indexes, or working with SQL/NoSQL databases."
+---
+
 # Database Skill
 
 ## Overview

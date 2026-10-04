@@ -1,3 +1,8 @@
+---
+name: data-tables
+description: "Conception de tableaux de donnees: tri, filtrage, pagination, selection, colonnes, etats vides et performance. Use when building or improving data tables, grids, sorting, filtering, or table UX."
+---
+
 # Data Tables Skill
 
 ## Overview

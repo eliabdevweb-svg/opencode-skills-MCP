@@ -1,0 +1,28 @@
+{
+  "_note": "A MERGER dans claude_desktop_config.json sous \"mcpServers\". Conservez vos autres cles (preferences, deploymentMode...).",
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp",
+        "--browser",
+        "chrome",
+        "--caps",
+        "vision,devtools",
+        "--allow-unrestricted-file-access"
+      ],
+      "env": {}
+    },
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "env": {}
+    }
+  }
+}

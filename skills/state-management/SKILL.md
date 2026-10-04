@@ -1,3 +1,8 @@
+---
+name: state-management
+description: "Gestion d'etat: patterns Redux, Zustand, Context, signals, architecture de store. Use when choosing or implementing state management in an application."
+---
+
 # State Management Skill
 
 ## Overview
@@ -240,16 +245,16 @@ function ProductFilters() {
 
 ```
 Is the state...
-├── Used by one component?
-│   └── useState / useReducer
-├── Used by sibling components?
-│   └── Lift state up to common parent
-├── Used by distant components?
-│   ├── Server data? → TanStack Query
-│   ├── UI/theme state? → Zustand
-│   └── Complex shared state? → Context + useReducer
-└── Form state?
-    └── React Hook Form + Zod
+â”œâ”€â”€ Used by one component?
+â”‚   â””â”€â”€ useState / useReducer
+â”œâ”€â”€ Used by sibling components?
+â”‚   â””â”€â”€ Lift state up to common parent
+â”œâ”€â”€ Used by distant components?
+â”‚   â”œâ”€â”€ Server data? â†’ TanStack Query
+â”‚   â”œâ”€â”€ UI/theme state? â†’ Zustand
+â”‚   â””â”€â”€ Complex shared state? â†’ Context + useReducer
+â””â”€â”€ Form state?
+    â””â”€â”€ React Hook Form + Zod
 ```
 
 ## Performance Patterns

@@ -1,3 +1,8 @@
+---
+name: accessibility
+description: "Accessibilite web WCAG 2.1 AA, HTML semantique, ARIA, navigation clavier, screen reader, design inclusif. Use when reviewing or implementing accessibility, ARIA patterns, keyboard navigation, or WCAG compliance."
+---
+
 # Accessibility (a11y) Skill
 
 ## Overview

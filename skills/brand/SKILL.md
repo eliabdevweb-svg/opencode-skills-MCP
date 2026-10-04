@@ -1,6 +1,6 @@
 ---
 name: brand
-description: Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides.
+description: Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, style guides. Use when defining or applying a brand identity, logo usage, tone of voice, charte graphique or branding guidelines, or when the user mentions marque, identite visuelle, charte, image de marque ou logo.
 argument-hint: "[update|review|create] [args]"
 metadata:
   author: claudekit

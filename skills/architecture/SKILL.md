@@ -1,6 +1,6 @@
 ---
 name: architecture
-description: "Principes d'architecture logicielle, design patterns, Clean Architecture, SOLID, et architecture microservices."
+description: "Principes d'architecture logicielle, design patterns, Clean Architecture, SOLID, et architecture microservices. Use when designing or reviewing software architecture, choosing a design pattern, refactoring toward Clean Architecture or SOLID, splitting a monolith, or when the user asks about architecture, patterns, microservices, couplage, couches ou separation des responsabilites."
 version: 1.0.0
 tags: [architecture, design-patterns, solid, clean-architecture, microservices]
 ---

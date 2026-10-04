@@ -1,3 +1,8 @@
+---
+name: documentation
+description: "Redaction de documentation technique: README, docs API, guides, changelogs. Use when writing or improving technical documentation, README files, or developer guides."
+---
+
 # Documentation Skill
 
 ## Overview
@@ -8,19 +13,19 @@ Expert in creating comprehensive, maintainable documentation using docs-as-code 
 ### 1. Documentation Structure
 ```
 docs/
-├── getting-started/
-│   ├── quickstart.md
-│   ├── installation.md
-│   └── configuration.md
-├── guides/
-│   ├── tutorials/
-│   ├── how-to/
-│   └── concepts/
-├── api-reference/
-│   ├── endpoints/
-│   └── schemas/
-├── examples/
-└── changelog.md
+â”œâ”€â”€ getting-started/
+â”‚   â”œâ”€â”€ quickstart.md
+â”‚   â”œâ”€â”€ installation.md
+â”‚   â””â”€â”€ configuration.md
+â”œâ”€â”€ guides/
+â”‚   â”œâ”€â”€ tutorials/
+â”‚   â”œâ”€â”€ how-to/
+â”‚   â””â”€â”€ concepts/
+â”œâ”€â”€ api-reference/
+â”‚   â”œâ”€â”€ endpoints/
+â”‚   â””â”€â”€ schemas/
+â”œâ”€â”€ examples/
+â””â”€â”€ changelog.md
 ```
 
 ### 2. README.md Best Practices

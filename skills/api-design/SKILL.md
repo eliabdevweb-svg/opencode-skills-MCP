@@ -1,3 +1,8 @@
+---
+name: api-design
+description: "Design d'APIs REST/GraphQL: conventions de routes, versioning, pagination, gestion d'erreurs, contrats et documentation. Use when designing or reviewing API endpoints, REST conventions, GraphQL schemas, or API docs."
+---
+
 # API Design Skill
 
 ## Overview

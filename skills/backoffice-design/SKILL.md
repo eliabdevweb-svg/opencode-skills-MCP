@@ -1,3 +1,8 @@
+---
+name: backoffice-design
+description: "Design d'interfaces back-office, admin panels et dashboards internes. Use when building admin panels, internal tools, back-office UI, or management dashboards."
+---
+
 # Back-Office & Admin Dashboard Design Skill
 
 ## Overview
@@ -18,64 +23,64 @@ Expert in designing operational admin panels, back-office interfaces, and busine
 
 **Fixed Sidebar (Default)**
 ```
-┌─────────────────────────────────────────┐
-│ Logo    Search              User  Bell  │
-├──────────┬──────────────────────────────┤
-│ Dashboard│                              │
-│ Users    │    Main Content Area         │
-│ Orders   │    (Cards, Tables, Forms)    │
-│ Products │                              │
-│ Settings │                              │
-│          │                              │
-│          │                              │
-└──────────┴──────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Logo    Search              User  Bell  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Dashboardâ”‚                              â”‚
+â”‚ Users    â”‚    Main Content Area         â”‚
+â”‚ Orders   â”‚    (Cards, Tables, Forms)    â”‚
+â”‚ Products â”‚                              â”‚
+â”‚ Settings â”‚                              â”‚
+â”‚          â”‚                              â”‚
+â”‚          â”‚                              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 Best for: Internal tools, CRUD-heavy admins, deep navigation
 
 **Top Navigation (Linear-style)**
 ```
-┌─────────────────────────────────────────┐
-│ Logo   Users   Orders   Settings  User  │
-├─────────────────────────────────────────┤
-│                                         │
-│         Focused Work Surface            │
-│         (Minimal chrome, dense)         │
-│                                         │
-└─────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Logo   Users   Orders   Settings  User  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                         â”‚
+â”‚         Focused Work Surface            â”‚
+â”‚         (Minimal chrome, dense)         â”‚
+â”‚                                         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 Best for: Product tools with few sections, keyboard-centric users
 
 **Table-First (Stripe-style)**
 ```
-┌─────────────────────────────────────────┐
-│ Orders              Filters    Export   │
-├─────────────────────────────────────────┤
-│ [Chart: Summary above table]            │
-├─────────────────────────────────────────┤
-│ ID │ Customer │ Amount │ Status │ Date  │
-│ 1  │ John     │ $120   │ Paid   │ Sep 8 │
-│ 2  │ Jane     │ $85    │ Pending│ Sep 7 │
-│ ...│ ...      │ ...    │ ...    │ ...   │
-└─────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Orders              Filters    Export   â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ [Chart: Summary above table]            â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ ID â”‚ Customer â”‚ Amount â”‚ Status â”‚ Date  â”‚
+â”‚ 1  â”‚ John     â”‚ $120   â”‚ Paid   â”‚ Sep 8 â”‚
+â”‚ 2  â”‚ Jane     â”‚ $85    â”‚ Pendingâ”‚ Sep 7 â”‚
+â”‚ ...â”‚ ...      â”‚ ...    â”‚ ...    â”‚ ...   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
-Best for: Transactions, orders, records — scan rows and drill in
+Best for: Transactions, orders, records â€” scan rows and drill in
 
 **Panel Grid (Grafana-style)**
 ```
-┌──────────┬──────────┬──────────┐
-│ [Panel 1]│ [Panel 2]│ [Panel 3]│
-├──────────┼──────────┼──────────┤
-│ [Panel 4]│ [Panel 5]│ [Panel 6]│
-└──────────┴──────────┴──────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ [Panel 1]â”‚ [Panel 2]â”‚ [Panel 3]â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ [Panel 4]â”‚ [Panel 5]â”‚ [Panel 6]â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
-Best for: Ops, monitoring, TV dashboards — glanceable metrics
+Best for: Ops, monitoring, TV dashboards â€” glanceable metrics
 
 ### 3. Information Hierarchy
 
 **3-Level Disclosure:**
-- **Level 1 (Primary)**: Key metrics, critical alerts, most-used actions — visible immediately
-- **Level 2 (Secondary)**: Filters, configuration, detailed tables — 1 interaction away
-- **Level 3 (Tertiary)**: Audit logs, historical data, advanced settings — on demand
+- **Level 1 (Primary)**: Key metrics, critical alerts, most-used actions â€” visible immediately
+- **Level 2 (Secondary)**: Filters, configuration, detailed tables â€” 1 interaction away
+- **Level 3 (Tertiary)**: Audit logs, historical data, advanced settings â€” on demand
 
 **The 5-Second Test**: User should see the one status they opened the dashboard for within 5 seconds. If not, hierarchy is the problem.
 
@@ -263,9 +268,9 @@ function TableSkeleton({ rows = 5, columns = 4 }) {
 - Test contrast at same ratios as light mode
 
 **Color as Signal:**
-- Brand color → chrome only, never in data
-- Status colors → success/warning/danger/info
-- Neutral → text, borders, backgrounds
+- Brand color â†’ chrome only, never in data
+- Status colors â†’ success/warning/danger/info
+- Neutral â†’ text, borders, backgrounds
 
 ### 10. Responsive Behavior
 

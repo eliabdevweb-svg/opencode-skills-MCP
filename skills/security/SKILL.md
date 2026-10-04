@@ -1,6 +1,6 @@
 ---
 name: security
-description: "Sécurité applicative, OWASP Top 10, gestion des secrets, authentification, et bonnes pratiques de sécurité."
+description: "Sécurité applicative, OWASP Top 10, gestion des secrets, authentification, et bonnes pratiques de sécurité. Use when reviewing code for vulnerabilities, applying OWASP Top 10, handling authentication or authorization, managing secrets and tokens, auditing dependencies, or when the user mentions securite, vulnerabilite, XSS, injection, CSRF ou mot de passe."
 version: 1.0.0
 tags: [security, owasp, authentication, secrets, hardening]
 ---

@@ -1,6 +1,6 @@
 ---
 name: ci-cd-automation
-description: "Intégration continue, déploiement continu, pipelines CI/CD, et automatisation des workflows DevOps."
+description: "Intégration continue, déploiement continu, pipelines CI/CD, et automatisation des workflows DevOps. Use when creating or debugging a CI/CD pipeline, a GitHub Actions workflow, automated build, test or deployment, release automation, or when the user says pipeline, CI/CD, deploiement automatique ou integration continue."
 version: 1.0.0
 tags: [ci-cd, automation, devops, github-actions, deployment]
 ---

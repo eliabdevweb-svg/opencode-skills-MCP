@@ -1,3 +1,8 @@
+---
+name: monitoring-observability
+description: "Monitoring et observabilite: logs, metriques, traces, alerting, dashboards SRE. Use when setting up observability, logging, metrics, tracing, or alerting."
+---
+
 # Monitoring & Observability Skill
 
 ## Overview
@@ -141,7 +146,7 @@ groups:
 
 **Alert Design:**
 - **Actionable**: Every alert requires human action
-- **Graded**: Warning → Critical → Emergency
+- **Graded**: Warning â†’ Critical â†’ Emergency
 - **Context-rich**: Include what, when, impact
 - **Runbook-linked**: Link to resolution steps
 

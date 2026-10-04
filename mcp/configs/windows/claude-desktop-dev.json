@@ -1,0 +1,32 @@
+{
+  "_note": "A MERGER dans %LOCALAPPDATA%\\Claude-3p\\claude_desktop_config.json (mode dev/Cowork). Cible DIFFERENTE de claude_desktop_config.json.",
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@playwright/mcp",
+        "--browser",
+        "chrome",
+        "--caps",
+        "vision,devtools",
+        "--allow-unrestricted-file-access"
+      ],
+      "env": {}
+    },
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "env": {}
+    }
+  }
+}
