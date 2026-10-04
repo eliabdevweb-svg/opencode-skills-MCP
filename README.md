@@ -1,6 +1,6 @@
 # OpenCode Skills & MCP
 
-**41 skills professionnels + configurations MCP** pour [opencode](https://opencode.ai),
+**42 skills professionnels + configurations MCP** pour [opencode](https://opencode.ai),
 **Claude Code**, **Claude Desktop** et **Antigravity**.
 
 Ce dépôt est une boîte à outils prête à l'emploi : des skills bien documentés, des
@@ -15,7 +15,7 @@ conflits lors des mises à jour**.
 ## Sommaire
 
 - [Ce que contient le dépôt](#ce-que-contient-le-dépôt)
-- [Les 41 skills](#les-41-skills)
+- [Les 42 skills](#les-42-skills)
 - [Installation](#installation)
   - [1. opencode](#1-opencode)
   - [2. Claude Code](#2-claude-code)
@@ -35,18 +35,18 @@ conflits lors des mises à jour**.
 
 | Dossier | Contenu |
 |---|---|
-| `skills/` | Les **41 skills** — chacun dans son propre dossier avec un `SKILL.md` |
+| `skills/` | Les **42 skills** — chacun dans son propre dossier avec un `SKILL.md` |
 | `mcp/` | Configurations MCP (`playwright`, `sequential-thinking`, `context7`, `exa`, `duckduckgo`) pour 5 cibles, Windows + macOS/Linux |
 | `rules/` | Fichiers `CLAUDE.md` de **routage automatique** : la table qui dit à l'IA quel skill charger |
 | `README.md` | Ce fichier |
 | `LICENSE` | Licence MIT |
 
-**Chiffres** : 41 skills · 296 fichiers · 26 descriptions en français, 15 en anglais ·
+**Chiffres** : 42 skills · 297 fichiers · 27 descriptions en français, 15 en anglais ·
 8 catégories · 5 serveurs MCP · 5 outils couverts · 10 fichiers de configuration.
 
 ---
 
-## Les 41 skills
+## Les 42 skills
 
 Chaque skill est autonome : son nom et sa description sont injectés dans le contexte de
 l'agent, qui **choisit le skill adapté** puis charge son `SKILL.md`. C'est pourquoi chaque
@@ -57,74 +57,75 @@ description contient une phrase déclencheuse explicite (« Use when… »).
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
 | 1 | `accessibility` | Accessibilité web WCAG 2.1 AA, HTML sémantique, ARIA, navigation clavier, screen reader... | FR |
-| 2 | `backoffice-design` | Design d'interfaces back-office, admin panels et dashboards internes. | FR |
-| 3 | `data-tables` | Conception de tableaux de données : tri, filtrage, pagination, sélection, états vides... | FR |
-| 4 | `form-design` | Conception de formulaires accessibles : validation, erreurs, progressive disclosure, wizards... | FR |
-| 5 | `state-management` | Gestion d'état : patterns Redux, Zustand, Context, signals, architecture de store. | FR |
-| 6 | `ui-styling` | Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI +... | EN |
-| 7 | `ui-ux-pro-max` | UI/UX design intelligence for web, mobile, and desktop. | EN |
+| 2 | `admin-shell` | Shell d’application back-office : topbar fixe et menu latéral fusionnés, en-tête et pied de page figés, coin de contenu arrondi stable, sidebar rétractable... | FR |
+| 3 | `backoffice-design` | Design d'interfaces back-office, admin panels et dashboards internes. | FR |
+| 4 | `data-tables` | Conception de tableaux de données : tri, filtrage, pagination, sélection, états vides... | FR |
+| 5 | `form-design` | Conception de formulaires accessibles : validation, erreurs, progressive disclosure, wizards... | FR |
+| 6 | `state-management` | Gestion d'état : patterns Redux, Zustand, Context, signals, architecture de store. | FR |
+| 7 | `ui-styling` | Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI +... | EN |
+| 8 | `ui-ux-pro-max` | UI/UX design intelligence for web, mobile, and desktop. | EN |
 
 ### Design
 
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
-| 8 | `banner-design` | Design banners for social media, ads, website heroes, creative assets, and print. | EN |
-| 9 | `brand` | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. | EN |
-| 10 | `design` | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55... | EN |
-| 11 | `design-system` | Token architecture, component specifications, and slide generation. | EN |
-| 12 | `design-system-shadcn` | Design system basé sur shadcn/ui et Radix UI. | FR |
+| 9 | `banner-design` | Design banners for social media, ads, website heroes, creative assets, and print. | EN |
+| 10 | `brand` | Brand voice, visual identity, messaging frameworks, asset management, brand consistency. | EN |
+| 11 | `design` | Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55... | EN |
+| 12 | `design-system` | Token architecture, component specifications, and slide generation. | EN |
+| 13 | `design-system-shadcn` | Design system basé sur shadcn/ui et Radix UI. | FR |
 
 ### 3D & Animation
 
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
-| 13 | `3d-performance-accessibility` | Performance, robustesse et accessibilité pour expériences web 3D et WebGL. | FR |
-| 14 | `3d-web-design` | Direction artistique et UX pour sites web 3D, immersifs et interactifs. | FR |
-| 15 | `gsap-core` | Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger... | EN |
-| 16 | `gsap-frameworks` | Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping... | EN |
-| 17 | `gsap-performance` | Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change... | EN |
-| 18 | `gsap-plugins` | Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip... | EN |
-| 19 | `gsap-react` | Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. | EN |
-| 20 | `gsap-scrolltrigger` | Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. | EN |
-| 21 | `gsap-timeline` | Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. | EN |
-| 22 | `gsap-utils` | Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap... | EN |
-| 23 | `motion-design-web` | Direction artistique et principes du motion design pour le web. | FR |
-| 24 | `threejs-webgl` | Implémentation de scènes 3D web avec Three.js, React Three Fiber, Drei, WebGL et GLTF. | FR |
+| 14 | `3d-performance-accessibility` | Performance, robustesse et accessibilité pour expériences web 3D et WebGL. | FR |
+| 15 | `3d-web-design` | Direction artistique et UX pour sites web 3D, immersifs et interactifs. | FR |
+| 16 | `gsap-core` | Official GSAP skill for the core API — gsap.to(), from(), fromTo(), easing, duration, stagger... | EN |
+| 17 | `gsap-frameworks` | Official GSAP skill for Vue, Svelte, and other non-React frameworks — lifecycle, scoping... | EN |
+| 18 | `gsap-performance` | Official GSAP skill for performance — prefer transforms, avoid layout thrashing, will-change... | EN |
+| 19 | `gsap-plugins` | Official GSAP skill for GSAP plugins — registration, ScrollToPlugin, ScrollSmoother, Flip... | EN |
+| 20 | `gsap-react` | Official GSAP skill for React — useGSAP hook, refs, gsap.context(), cleanup. | EN |
+| 21 | `gsap-scrolltrigger` | Official GSAP skill for ScrollTrigger — scroll-linked animations, pinning, scrub, triggers. | EN |
+| 22 | `gsap-timeline` | Official GSAP skill for timelines — gsap.timeline(), position parameter, nesting, playback. | EN |
+| 23 | `gsap-utils` | Official GSAP skill for gsap.utils — clamp, mapRange, normalize, interpolate, random, snap... | EN |
+| 24 | `motion-design-web` | Direction artistique et principes du motion design pour le web. | FR |
+| 25 | `threejs-webgl` | Implémentation de scènes 3D web avec Three.js, React Three Fiber, Drei, WebGL et GLTF. | FR |
 
 ### SaaS
 
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
-| 25 | `saas-design-system` | Design System spécifique SaaS. | FR |
-| 26 | `saas-system-design` | System design et architecture SaaS modernes en 2026. | FR |
-| 27 | `saas-ui-design` | UI/UX design moderne pour SaaS en 2026. | FR |
+| 26 | `saas-design-system` | Design System spécifique SaaS. | FR |
+| 27 | `saas-system-design` | System design et architecture SaaS modernes en 2026. | FR |
+| 28 | `saas-ui-design` | UI/UX design moderne pour SaaS en 2026. | FR |
 
 ### Backend
 
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
-| 28 | `api-design` | Design d'APIs REST/GraphQL : conventions de routes, versioning, pagination, gestion d'erreurs... | FR |
-| 29 | `architecture` | Principes d'architecture logicielle, design patterns, Clean Architecture, SOLID, et... | FR |
-| 30 | `database` | Conception et optimisation de bases de données : modélisation, index, migrations, ORM, SQL et... | FR |
+| 29 | `api-design` | Design d'APIs REST/GraphQL : conventions de routes, versioning, pagination, gestion d'erreurs... | FR |
+| 30 | `architecture` | Principes d'architecture logicielle, design patterns, Clean Architecture, SOLID, et... | FR |
+| 31 | `database` | Conception et optimisation de bases de données : modélisation, index, migrations, ORM, SQL et... | FR |
 
 ### DevOps
 
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
-| 31 | `ci-cd-automation` | Intégration continue, déploiement continu, pipelines CI/CD, et automatisation des workflows... | FR |
-| 32 | `coding-standards` | Standards de codage professionnels, bonnes pratiques, clean code, et conventions pour un code... | FR |
-| 33 | `git-workflow` | Workflow Git professionnel, branching strategies, commit conventions, et collaboration... | FR |
-| 34 | `monitoring-observability` | Monitoring et observabilité : logs, métriques, traces, alerting, dashboards SRE. | FR |
-| 35 | `performance` | Optimisation des performances web, Core Web Vitals, bundle analysis, caching, et monitoring. | FR |
-| 36 | `security` | Sécurité applicative, OWASP Top 10, gestion des secrets, authentification, et bonnes pratiques... | FR |
-| 37 | `testing` | Stratégies de test, TDD, tests unitaires, d'intégration, E2E, et couverture de code. | FR |
+| 32 | `ci-cd-automation` | Intégration continue, déploiement continu, pipelines CI/CD, et automatisation des workflows... | FR |
+| 33 | `coding-standards` | Standards de codage professionnels, bonnes pratiques, clean code, et conventions pour un code... | FR |
+| 34 | `git-workflow` | Workflow Git professionnel, branching strategies, commit conventions, et collaboration... | FR |
+| 35 | `monitoring-observability` | Monitoring et observabilité : logs, métriques, traces, alerting, dashboards SRE. | FR |
+| 36 | `performance` | Optimisation des performances web, Core Web Vitals, bundle analysis, caching, et monitoring. | FR |
+| 37 | `security` | Sécurité applicative, OWASP Top 10, gestion des secrets, authentification, et bonnes pratiques... | FR |
+| 38 | `testing` | Stratégies de test, TDD, tests unitaires, d'intégration, E2E, et couverture de code. | FR |
 
 ### Docs
 
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
-| 38 | `documentation` | Rédaction de documentation technique : README, docs API, guides, changelogs. | FR |
-| 39 | `slides` | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts... | EN |
+| 39 | `documentation` | Rédaction de documentation technique : README, docs API, guides, changelogs. | FR |
+| 40 | `slides` | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts... | EN |
 
 ### Fiabilité & tokens
 
@@ -134,8 +135,8 @@ Anthropic.
 
 | # | Skill | Description | Lang |
 |---:|---|---|:--:|
-| 40 | `anti-hallucination` | Réduction des hallucinations selon les guides officiels Anthropic : permission de ne pas savoir, citations verbatim, vérification par citations, restriction de connaissance externe, chain-of-thought, Best-of-N... | FR |
-| 41 | `context-engineering` | Context engineering et économie de tokens selon Anthropic : attention budget, context rot, compaction, tool-result clearing, structured note-taking, subagents, progressive disclosure, prompt caching... | FR |
+| 41 | `anti-hallucination` | Réduction des hallucinations selon les guides officiels Anthropic : permission de ne pas savoir, citations verbatim, vérification par citations, restriction de connaissance externe, chain-of-thought, Best-of-N... | FR |
+| 42 | `context-engineering` | Context engineering et économie de tokens selon Anthropic : attention budget, context rot, compaction, tool-result clearing, structured note-taking, subagents, progressive disclosure, prompt caching... | FR |
 
 ---
 
@@ -286,7 +287,7 @@ Get-ChildItem "$env:LOCALAPPDATA\Claude-3p\local-agent-mode-sessions\skills-plug
   Select-Object -First 1 -ExpandProperty DirectoryName
 ```
 
-Copiez ensuite les 41 dossiers dans le sous-dossier `skills/` de ce bundle.
+Copiez ensuite les 42 dossiers dans le sous-dossier `skills/` de ce bundle.
 
 **Serveurs MCP** — voir [`mcp/README.md`](mcp/README.md) pour les deux fichiers à
 fusionner :
@@ -301,7 +302,7 @@ fusionner :
 ### 4. Antigravity
 
 [Antigravity](https://antigravity.google) (2.0, l'IDE, ses extensions et la CLI) utilise
-le **standard ouvert** `SKILL.md` : les 41 skills de ce dépôt y fonctionnent **sans
+le **standard ouvert** `SKILL.md` : les 42 skills de ce dépôt y fonctionnent **sans
 aucune modification**.
 
 **Skills** — copie ou lien vers l'un des deux emplacements :
@@ -525,7 +526,7 @@ opencode-skills-MCP/
 ├── README.md                  ← ce fichier
 ├── LICENSE
 ├── .gitattributes
-├── skills/                    ← 41 skills (296 fichiers)
+├── skills/                    ← 42 skills (297 fichiers)
 │   ├── accessibility/SKILL.md
 │   ├── api-design/SKILL.md
 │   ├── …

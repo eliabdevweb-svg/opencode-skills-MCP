@@ -23,6 +23,7 @@ fournie par l'outil `skill` et **charge le skill correspondant en premier**, pui
 | Interfaces SaaS (onboarding, dashboards, palettes) | `saas-ui-design` |
 | Design system SaaS multi-tenant | `saas-design-system` |
 | Back-office, admin panel, dashboard interne | `backoffice-design` |
+| Shell d'admin : topbar + menu latéral fusionnés, sidebar rétractable, coin de contenu arrondi | `admin-shell` |
 | Formulaires, validation, wizards | `form-design` |
 | Tableaux de données (tri, filtre, pagination) | `data-tables` |
 | Accessibilité WCAG 2.1 AA, ARIA, navigation clavier | `accessibility` |
@@ -31,7 +32,9 @@ fournie par l'outil `skill` et **charge le skill correspondant en premier**, pui
 
 **Arbitrage en cas de chevauchement** : `ui-ux-pro-max` gagne pour tout ce qui est
 **interface et UX** ; `design` gagne pour tout ce qui est **asset graphique produit** ;
-`ui-styling` gagne dès qu'il s'agit d'**écrire du CSS**.
+`ui-styling` gagne dès qu'il s'agit d'**écrire du CSS** ; `admin-shell` gagne pour le
+**layout shell** (sidebar + topbar + panneau de contenu) et `backoffice-design` pour le
+**reste de la back-office** (RBAC, tableaux, états, hiérarchie).
 
 ## Table de routage — 3D et animation
 
