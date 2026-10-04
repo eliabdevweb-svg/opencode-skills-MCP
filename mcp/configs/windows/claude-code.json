@@ -42,6 +42,17 @@
     "exa": {
       "type": "http",
       "url": "https://mcp.exa.ai/mcp"
+    },
+    "duckduckgo": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "duckduckgo-mcp-server"
+      ],
+      "env": {}
     }
   }
 }

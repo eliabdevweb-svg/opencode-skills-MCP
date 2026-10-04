@@ -53,6 +53,18 @@
       ],
       "enabled": true,
       "timeout": 30000
+    },
+    "duckduckgo": {
+      "type": "local",
+      "command": [
+        "cmd",
+        "/c",
+        "npx",
+        "-y",
+        "duckduckgo-mcp-server"
+      ],
+      "enabled": true,
+      "timeout": 30000
     }
   }
 }

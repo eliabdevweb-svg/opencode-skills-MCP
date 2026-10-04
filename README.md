@@ -36,13 +36,13 @@ conflits lors des mises à jour**.
 | Dossier | Contenu |
 |---|---|
 | `skills/` | Les **41 skills** — chacun dans son propre dossier avec un `SKILL.md` |
-| `mcp/` | Configurations MCP (`playwright`, `sequential-thinking`, `context7`, `exa`) pour 5 cibles, Windows + macOS/Linux |
+| `mcp/` | Configurations MCP (`playwright`, `sequential-thinking`, `context7`, `exa`, `duckduckgo`) pour 5 cibles, Windows + macOS/Linux |
 | `rules/` | Fichiers `CLAUDE.md` de **routage automatique** : la table qui dit à l'IA quel skill charger |
 | `README.md` | Ce fichier |
 | `LICENSE` | Licence MIT |
 
 **Chiffres** : 41 skills · 296 fichiers · 26 descriptions en français, 15 en anglais ·
-8 catégories · 4 serveurs MCP · 5 outils couverts · 10 fichiers de configuration.
+8 catégories · 5 serveurs MCP · 5 outils couverts · 10 fichiers de configuration.
 
 ---
 
@@ -471,7 +471,7 @@ rm -rf ~/.claude/skills/*
 
 ## Serveurs MCP
 
-Quatre serveurs MCP sont fournis, avec **10 fichiers de configuration** (5 cibles × 2
+Cinq serveurs MCP sont fournis, avec **10 fichiers de configuration** (5 cibles × 2
 systèmes d'exploitation) :
 
 | Serveur | Apport | Rôle |
@@ -480,13 +480,14 @@ systèmes d'exploitation) :
 | **`sequential-thinking`** | Raisonnement structuré multi-étapes | 🛡️ vérification du raisonnement |
 | **`context7`** | Documentation **à jour et versionnée** injectée dans le prompt — supprime les APIs hallucinées et les exemples périmés | 🛡️ **anti-hallucination** |
 | **`exa`** | **Recherche web** réelle et récupération de contenu de pages (`web_search_exa`, `web_fetch_exa`) | 🛡️ **anti-hallucination** |
+| **`duckduckgo`** | **Recherche web de secours** — index indépendant, sans quota ni clé (`duckduckgo_web_search`) | 🛡️ **anti-hallucination** |
 
-`context7` et `exa` n'exigent **aucune clé API** — les deux fonctionnent en usage
-anonyme, la clé ne servant qu'à élever la limite de débit. `context7` est le serveur
-MCP le plus utilisé de l'écosystème et l'un des plus économes (~1 200 tokens de schéma
-pour 2 outils) ; `exa` ancre la réponse dans des sources réelles et datées. Sur
-Claude Code, `exa` est branché en **HTTP natif** ; partout ailleurs il passe par le
-pont stdio `mcp-remote`.
+`context7`, `exa` et `duckduckgo` n'exigent **aucune clé API** — tous fonctionnent en
+usage anonyme, la clé ne servant qu'à élever la limite de débit. `context7` est le
+serveur MCP le plus utilisé de l'écosystème et l'un des plus économes (~1 200 tokens
+de schéma pour 2 outils) ; `exa` ancre la réponse dans des sources réelles et datées ;
+`duckduckgo` sert de recours sans quota. Sur Claude Code, `exa` est branché en
+**HTTP natif** ; partout ailleurs il passe par le pont stdio `mcp-remote`.
 
 **Cibles couvertes** : opencode · Claude Code · Claude Desktop · Claude Desktop (mode dev)
 · **Antigravity** (2.0 / IDE / extensions / CLI)

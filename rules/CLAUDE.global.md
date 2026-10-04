@@ -83,6 +83,7 @@ fournie par l'outil `skill` et **charge le skill correspondant en premier**, pui
 | `sequential-thinking` | Raisonnement complexe multi-étapes, architecture, arbitrage |
 | `context7` | **Documentation à jour et versionnée** — obligatoire avant d'écrire un code dépendant d'une librairie. Supprime les APIs hallucinées. Invoquer avec *« use context7 »* |
 | `exa` | Recherche web (recherches récentes, documentation) |
+| `duckduckgo` | Recherche web **de secours** — index indépendant, sans quota, si `exa` est limité |
 
 ### Protocole de test visuel
 

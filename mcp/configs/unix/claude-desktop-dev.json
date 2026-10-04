@@ -42,6 +42,15 @@
         "https://mcp.exa.ai/mcp"
       ],
       "env": {}
+    },
+    "duckduckgo": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "duckduckgo-mcp-server"
+      ],
+      "env": {}
     }
   }
 }

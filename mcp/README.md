@@ -1,6 +1,6 @@
 # Guide d'installation — serveurs MCP
 
-Ce dossier contient les configurations pour **quatre** serveurs MCP complémentaires aux skills :
+Ce dossier contient les configurations pour **cinq** serveurs MCP complémentaires aux skills :
 
 | Serveur MCP | Ce qu'il apporte | Rôle | Outils exposés |
 |---|---|---|---|
@@ -8,16 +8,18 @@ Ce dossier contient les configurations pour **quatre** serveurs MCP complémenta
 | **`sequential-thinking`** | Raisonnement structuré multi-étapes pour les tâches complexes | 🛡️ vérification du raisonnement | `sequential_thinking_*` |
 | **`context7`** | Documentation **à jour et versionnée** injectée dans le prompt | 🛡️ **anti-hallucination** | 2 outils (`resolve-library-id`, `query-docs`) |
 | **`exa`** | **Recherche web** réelle et récupération de contenu de pages | 🛡️ **anti-hallucination** (ancrage dans le réel) | 2 outils (`web_search_exa`, `web_fetch_exa`) |
+| **`duckduckgo`** | **Recherche web de secours** — index indépendant, sans quota ni clé | 🛡️ **anti-hallucination** (recours) | 1 outil (`duckduckgo_web_search`) |
 
-> **Prérequis** : Node.js ≥ 18 (`node -v`). Les quatre serveurs sont lancés via `npx`
+> **Prérequis** : Node.js ≥ 18 (`node -v`). Les cinq serveurs sont lancés via `npx`
 > (sauf `exa` sur Claude Code, qui utilise l'HTTP natif), aucun install globale n'est nécessaire.
 >
-> **Aucune clé API n'est requise** pour `context7` ni pour `exa` : les deux fonctionnent
+> **Aucune clé API n'est requise** : `context7`, `exa` et `duckduckgo` fonctionnent tous
 > en usage anonyme. Les clés ne servent qu'aux limites de débit plus élevées
 > ([context7.com/dashboard](https://context7.com/dashboard) /
 > [dashboard.exa.ai/api-keys](https://dashboard.exa.ai/api-keys)).
 > `context7` cible les *« hallucinated APIs that don't even exist »* (Upstash) ;
-> `exa` ancre la réponse dans des sources réelles et récentes.
+> `exa` ancre la réponse dans des sources réelles et récentes ; `duckduckgo` sert de
+> recours si la limite d'Exa est atteinte.
 
 ---
 
@@ -30,7 +32,7 @@ des chemins personnels ou des clés API. Un remplacement les détruirait.
 
 1. **Sauvegarder** le fichier : `cp fichier.json fichier.json.bak`
 2. Ouvrir le fichier et **rajouter uniquement** les blocs `playwright` /
-   `sequential-thinking` / `context7` / `exa`
+   `sequential-thinking` / `context7` / `exa` / `duckduckgo`
    à l'intérieur de la clé `mcpServers` (ou `mcp` pour opencode) **qui existe déjà**.
    Si la clé n'existe pas encore, la créer.
 3. Ne toucher à **aucune autre clé** du fichier.
@@ -172,7 +174,7 @@ Antigravity utilise le **même format `mcpServers`** que Claude Desktop.
 
 1. Panneau agent → menu **…** → **MCP Servers** → **Manage MCP Servers**
 2. **View raw config** — ouvre le `mcp_config.json`
-3. Fusionner les blocs `playwright`, `sequential-thinking`, `context7` et `exa`
+3. Fusionner les blocs `playwright`, `sequential-thinking`, `context7`, `exa` et `duckduckgo`
 
 **À la main**, dans `~/.gemini/config/mcp_config.json` (global) :
 
@@ -298,6 +300,48 @@ le pont se connecte en HTTP sans OAuth et reste utilisable sans clé.
 
 ---
 
+## DuckDuckGo — recherche web de secours
+
+Clé `duckduckgo`, paquet [`duckduckgo-mcp-server`](https://www.npmjs.com/package/duckduckgo-mcp-server)
+(MIT). Son index est **indépendant** de celui d'Exa et n'applique **aucun quota** :
+c'est le recours quand la limite de débit anonyme d'Exa est atteinte, ou un choix
+valable si vous préférez éviter tout service tiers.
+
+**Formats :**
+
+```jsonc
+// opencode (mcp, commande en tableau)
+"duckduckgo": { "type": "local", "command": ["npx", "-y", "duckduckgo-mcp-server"], "enabled": true, "timeout": 30000 }
+
+// Claude Code / Claude Desktop / Claude Desktop dev (mcpServers, type stdio)
+"duckduckgo": { "type": "stdio", "command": "npx", "args": ["-y", "duckduckgo-mcp-server"], "env": {} }
+
+// Antigravity (mcpServers, sans type)
+"duckduckgo": { "command": "npx", "args": ["-y", "duckduckgo-mcp-server"], "env": {} }
+
+// Windows — variante systématique
+{ "command": "cmd", "args": ["/c", "npx", "-y", "duckduckgo-mcp-server"] }
+```
+
+**Outil exposé** : `duckduckgo_web_search`. `timeout` à 30 000 ms car le premier
+lancement de `npx` télécharge le paquet. **Aucune clé API**, aucun compte.
+
+> ⚠️ **Ne pas confondre** avec le paquet [`duckduckgo-mcp`](https://www.npmjs.com/package/duckduckgo-mcp) :
+> celui-ci déclare un binaire `bun` et échoue sous Windows avec
+> `« 'bun' n'est pas reconnu… »` si bun n'est pas installé. C'est bien
+> **`duckduckgo-mcp-server`** qui est retenu ici — testé : `initialize` et
+> `tools/list` répondent correctement.
+
+**Coût de schéma** : ~250 tokens pour 1 outil.
+
+**Alternatives** : [`duckduckgo-mcp-server` Python](https://github.com/nickclyde/duckduckgo-mcp-server)
+(exige `uvx`), ou un serveur à clé comme Brave Search / Tavily pour des résultats
+enrichis (scores, snippets structurés).
+
+---
+
+## Redémarrage obligatoire
+
 **Aucune configuration n'est rechargée à chaud.** Après chaque modification :
 
 - **opencode** — quitter complètement l'application et la relancer
@@ -326,4 +370,6 @@ le pont se connecte en HTTP sans OAuth et reste utilisable sans clé.
 | Exa : le pont `mcp-remote` affiche « Discovering OAuth… » puis bloque | Message d'info sur `stderr`, pas une erreur | Ignorer — le pont reste utilisable sans clé ; si bloqué, utiliser l'HTTP natif (`"type": "http"`) chez Claude Code |
 | Exa : rate limit 429 | Usage anonyme, quota bas | Clé optionnelle sur [dashboard.exa.ai/api-keys](https://dashboard.exa.ai/api-keys), passer par `?exaApiKey=…` |
 | Exa absent de Claude Desktop | Serveur distant configuré en `url` | Claude Desktop n'accepte que du **stdio** : passer par `npx -y mcp-remote …` |
+| DuckDuckGo : `« 'bun' n'est pas reconnu… »` | Mauvais paquet (`duckduckgo-mcp`, binaire `bun`) | Installer **`duckduckgo-mcp-server`** (paquet Node, `npx`) |
+| DuckDuckGo : `duckduckgo_web_search` renvoie une page de challenge/blocage | IP ou réseau filtrés par DuckDuckGo | Utiliser `web_search_exa` comme source principale, réessayer plus tard |
 | Conflit à `git pull` du dépôt | Clone effectué **dans** le dossier de skills | Voir la section « Éviter les conflits » du README principal |
