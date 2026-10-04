@@ -29,6 +29,15 @@
         "@upstash/context7-mcp"
       ],
       "env": {}
+    },
+    "exa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.exa.ai/mcp"
+      ],
+      "env": {}
     }
   }
 }

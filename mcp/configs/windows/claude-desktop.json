@@ -38,6 +38,18 @@
         "@upstash/context7-mcp"
       ],
       "env": {}
+    },
+    "exa": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "mcp-remote",
+        "https://mcp.exa.ai/mcp"
+      ],
+      "env": {}
     }
   }
 }

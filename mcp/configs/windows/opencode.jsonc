@@ -40,6 +40,19 @@
       ],
       "enabled": true,
       "timeout": 20000
+    },
+    "exa": {
+      "type": "local",
+      "command": [
+        "cmd",
+        "/c",
+        "npx",
+        "-y",
+        "mcp-remote",
+        "https://mcp.exa.ai/mcp"
+      ],
+      "enabled": true,
+      "timeout": 30000
     }
   }
 }

@@ -38,6 +38,10 @@
         "@upstash/context7-mcp"
       ],
       "env": {}
+    },
+    "exa": {
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp"
     }
   }
 }

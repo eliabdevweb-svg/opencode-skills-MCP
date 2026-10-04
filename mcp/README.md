@@ -1,20 +1,23 @@
 # Guide d'installation — serveurs MCP
 
-Ce dossier contient les configurations pour **trois** serveurs MCP complémentaires aux skills :
+Ce dossier contient les configurations pour **quatre** serveurs MCP complémentaires aux skills :
 
 | Serveur MCP | Ce qu'il apporte | Rôle | Outils exposés |
 |---|---|---|---|
 | **`playwright`** | Tests visuels et interactifs réels : navigation, capture d'écran, snapshot d'accessibilité, console, réseau | 🛡️ vérification empirique | ~44 outils `browser_*` |
 | **`sequential-thinking`** | Raisonnement structuré multi-étapes pour les tâches complexes | 🛡️ vérification du raisonnement | `sequential_thinking_*` |
 | **`context7`** | Documentation **à jour et versionnée** injectée dans le prompt | 🛡️ **anti-hallucination** | 2 outils (`resolve-library-id`, `query-docs`) |
+| **`exa`** | **Recherche web** réelle et récupération de contenu de pages | 🛡️ **anti-hallucination** (ancrage dans le réel) | 2 outils (`web_search_exa`, `web_fetch_exa`) |
 
-> **Prérequis** : Node.js ≥ 18 (`node -v`). Les trois serveurs sont lancés via `npx`,
-> aucun install globale n'est nécessaire.
+> **Prérequis** : Node.js ≥ 18 (`node -v`). Les quatre serveurs sont lancés via `npx`
+> (sauf `exa` sur Claude Code, qui utilise l'HTTP natif), aucun install globale n'est nécessaire.
 >
-> **`context7` n'exige AUCUNE clé API** pour un usage standard (la clé ne sert qu'aux
-> limits de débit plus élevées et aux dépôts privés — [context7.com/dashboard](https://context7.com/dashboard)).
-> C'est le serveur MCP le plus utilisé de l'écosystème, et il cible directement les
-> *« hallucinated APIs that don't even exist »* (Upstash).
+> **Aucune clé API n'est requise** pour `context7` ni pour `exa` : les deux fonctionnent
+> en usage anonyme. Les clés ne servent qu'aux limites de débit plus élevées
+> ([context7.com/dashboard](https://context7.com/dashboard) /
+> [dashboard.exa.ai/api-keys](https://dashboard.exa.ai/api-keys)).
+> `context7` cible les *« hallucinated APIs that don't even exist »* (Upstash) ;
+> `exa` ancre la réponse dans des sources réelles et récentes.
 
 ---
 
@@ -27,7 +30,7 @@ des chemins personnels ou des clés API. Un remplacement les détruirait.
 
 1. **Sauvegarder** le fichier : `cp fichier.json fichier.json.bak`
 2. Ouvrir le fichier et **rajouter uniquement** les blocs `playwright` /
-   `sequential-thinking` / `context7`
+   `sequential-thinking` / `context7` / `exa`
    à l'intérieur de la clé `mcpServers` (ou `mcp` pour opencode) **qui existe déjà**.
    Si la clé n'existe pas encore, la créer.
 3. Ne toucher à **aucune autre clé** du fichier.
@@ -169,7 +172,7 @@ Antigravity utilise le **même format `mcpServers`** que Claude Desktop.
 
 1. Panneau agent → menu **…** → **MCP Servers** → **Manage MCP Servers**
 2. **View raw config** — ouvre le `mcp_config.json`
-3. Fusionner les blocs `playwright` et `sequential-thinking`
+3. Fusionner les blocs `playwright`, `sequential-thinking`, `context7` et `exa`
 
 **À la main**, dans `~/.gemini/config/mcp_config.json` (global) :
 
@@ -246,7 +249,54 @@ Upstash signale que `SystemRoot` et `APPDATA` doivent être présents dans `env`
 
 ---
 
-## Redémarrage obligatoire
+## Exa — recherche web et récupération de contenu
+
+Le bloc à fusionner est fourni dans `configs/<os>/<outil>.json` sous la clé `exa`.
+
+**Choix du pont** : l'endpoint hébergé `https://mcp.exa.ai/mcp` parle HTTP nativement,
+mais **Claude Desktop et Antigravity n'acceptent que du stdio**. On passe donc par
+[`mcp-remote`](https://www.npmjs.com/package/mcp-remote), un pont stdio ↔ HTTP universel.
+**Claude Code** supporte l'HTTP natif — c'est la forme recommandée pour lui (aucun
+processus `npx` à lancer).
+
+**Formats :**
+
+```jsonc
+// opencode (mcp, commande en tableau)
+"exa": { "type": "local", "command": ["npx", "-y", "mcp-remote", "https://mcp.exa.ai/mcp"], "enabled": true, "timeout": 30000 }
+
+// Claude Code — HTTP natif, sans pont (recommandé)
+"exa": { "type": "http", "url": "https://mcp.exa.ai/mcp" }
+
+// Claude Desktop / Claude Desktop dev (mcpServers, type stdio)
+"exa": { "type": "stdio", "command": "npx", "args": ["-y", "mcp-remote", "https://mcp.exa.ai/mcp"], "env": {} }
+
+// Antigravity (mcpServers, sans type)
+"exa": { "command": "npx", "args": ["-y", "mcp-remote", "https://mcp.exa.ai/mcp"], "env": {} }
+
+// Windows — variante systématique
+{ "command": "cmd", "args": ["/c", "npx", "-y", "mcp-remote", "https://mcp.exa.ai/mcp"] }
+```
+
+**Outils exposés** : `web_search_exa` (recherche web) et `web_fetch_exa`
+(récupération du contenu d'une page). `timeout` porte à 30 000 ms car le premier
+lancement de `npx` télécharge le paquet.
+
+**Aucune clé API** : le serveur hébergé fonctionne **en anonyme**, avec une limite de
+débit plus basse. Une clé (optionnelle) se passe dans l'URL : `?exaApiKey=…`.
+
+**Pourquoi c'est un anti-hallucination** : c'est le complément direct d'`anti-hallucination`
+et de `context-engineering` — le modèle ancre sa réponse sur des sources **réelles et
+datées** au lieu de sa mémoire d'entraînement. Le skill `anti-hallucination` demande
+d'ailleurs explicitement une recherche web avant toute affirmation vérifiable.
+
+**Coût de schéma** : ~600 tokens pour 2 outils.
+
+**Remarque Windows** : `mcp-remote` détecte un port de callback à partir de l'URL
+(`Discovering OAuth server configuration…` dans `stderr`). Ce message est **normal** :
+le pont se connecte en HTTP sans OAuth et reste utilisable sans clé.
+
+---
 
 **Aucune configuration n'est rechargée à chaud.** Après chaque modification :
 
@@ -273,4 +323,7 @@ Upstash signale que `SystemRoot` et `APPDATA` doivent être présents dans `env`
 | Antigravity rejette un serveur distant | Champ `url` / `httpUrl` (legacy) | Utiliser `"serverUrl"` |
 | Context7 : `spawn npx ENOENT` uniquement sur ce serveur | `SystemRoot` / `APPDATA` absents de `env` | Ajouter les deux clés dans le bloc `env` (voir section Context7) |
 | Context7 : limites de débit atteintes | Pas de clé API (usage anonyme) | Clé optionnelle sur [context7.com/dashboard](https://context7.com/dashboard), passer par `--api-key` |
+| Exa : le pont `mcp-remote` affiche « Discovering OAuth… » puis bloque | Message d'info sur `stderr`, pas une erreur | Ignorer — le pont reste utilisable sans clé ; si bloqué, utiliser l'HTTP natif (`"type": "http"`) chez Claude Code |
+| Exa : rate limit 429 | Usage anonyme, quota bas | Clé optionnelle sur [dashboard.exa.ai/api-keys](https://dashboard.exa.ai/api-keys), passer par `?exaApiKey=…` |
+| Exa absent de Claude Desktop | Serveur distant configuré en `url` | Claude Desktop n'accepte que du **stdio** : passer par `npx -y mcp-remote …` |
 | Conflit à `git pull` du dépôt | Clone effectué **dans** le dossier de skills | Voir la section « Éviter les conflits » du README principal |
