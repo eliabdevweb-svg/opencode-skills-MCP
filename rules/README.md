@@ -6,6 +6,9 @@
 >
 > Si vous préférez `AGENTS.md` (convention opencode, versionné dans Git), sachez qu'il
 > **prioritaire** : il masquera `CLAUDE.md` pour opencode. N'utilisez que l'un des deux.
+>
+> 🤖 **Antigravity** ne lit **ni** `CLAUDE.md` **ni** de frontmatter : il lit `AGENTS.md`
+> ou `GEMINI.md` en markdown brut. Voir [Antigravity](#antigravity) plus bas.
 
 ---
 
@@ -61,3 +64,48 @@ ne le créez pas si vous voulez que ce fichier s'applique).
 
 **Si vous avez déjà un `~/.claude/CLAUDE.md`** : ne remplacez pas, **fusionnez** —
 ajoutez le bloc « Table de routage » à votre fichier existant.
+
+---
+
+## Antigravity
+
+Antigravity (2.0, l'IDE et ses extensions, la CLI) utilise son propre système de règles.
+
+**Emplacements** :
+
+| Portée | Emplacement |
+|---|---|
+| Workspace | `AGENTS.md` ou `GEMINI.md` à la racine du projet (ou dans un sous-dossier) |
+| Workspace — modulaire | `.agents/rules/*.md` |
+| Global | `~/.gemini/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.gemini/config/AGENTS.md`, `~/.gemini/config/GEMINI.md` |
+| Global — modulaire | `~/.gemini/config/rules/*.md` |
+
+**Installation du fichier global de routage :**
+
+```bash
+# Linux / macOS
+cp rules/CLAUDE.global.md ~/.gemini/AGENTS.md
+
+# Windows (PowerShell)
+Copy-Item rules\CLAUDE.global.md "$env:USERPROFILE\.gemini\AGENTS.md"
+```
+
+**3 règles à connaître :**
+
+1. **`AGENTS.md` et `GEMINI.md` n'ont PAS de frontmatter.** Antigravity traite tout le
+   fichier comme du markdown brut et l'active en permanence (`always_on`). Notre
+   `CLAUDE.global.md` respecte déjà cette contrainte — il suffit de le renommer.
+   Si les deux coexistent, **`AGENTS.md` gagne**.
+2. **Les fichiers de `.agents/rules/` exigent** un frontmatter YAML avec un `trigger:`
+   valide (`always_on`, `model_decision`, `glob`, `manual`) et, pour `model_decision`,
+   un `description:`. Un déclencheur absent ou mal orthographié (`alwaysOn` en camelCase)
+   fait **ignorer silencieusement** la règle.
+3. **Limites** : 24 000 octets par fichier, et 20 000 tokens au total pour toutes les
+   règles `always_on`. Au-delà, Antigravity remplace automatiquement les plus gros
+   fichiers par de simples pointeurs. Notre fichier global (4,7 Ko) reste largement
+   en dessous.
+
+**Rapport règle ↔ skill** : Antigravity recommande d'écrire une *règle* pour les
+contraintes (« toujours utiliser zod ») et un *skill* pour les procédures multi-étapes
+(« comment lancer les migrations »). Le tableau de routage de `CLAUDE.global.md` est une
+règle ; les 39 dossiers de `skills/` sont des skills.

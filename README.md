@@ -20,7 +20,8 @@ conflits lors des mises à jour**.
   - [1. opencode](#1-opencode)
   - [2. Claude Code](#2-claude-code)
   - [3. Claude Desktop](#3-claude-desktop)
-  - [4. Vérification](#4-vérification)
+  - [4. Antigravity](#4-antigravity)
+  - [5. Vérification](#5-vérification)
 - [⚠️ Éviter les conflits lors des mises à jour](#éviter-les-conflits-lors-des-mises-à-jour)
 - [Serveurs MCP](#serveurs-mcp)
 - [Fichiers de règles de routage](#fichiers-de-règles-de-routage)
@@ -35,13 +36,13 @@ conflits lors des mises à jour**.
 | Dossier | Contenu |
 |---|---|
 | `skills/` | Les **39 skills** — chacun dans son propre dossier avec un `SKILL.md` |
-| `mcp/` | Configurations MCP (`playwright`, `sequential-thinking`) pour 4 cibles, Windows + macOS/Linux |
+| `mcp/` | Configurations MCP (`playwright`, `sequential-thinking`) pour 5 cibles, Windows + macOS/Linux |
 | `rules/` | Fichiers `CLAUDE.md` de **routage automatique** : la table qui dit à l'IA quel skill charger |
 | `README.md` | Ce fichier |
 | `LICENSE` | Licence MIT |
 
 **Chiffres** : 39 skills · 294 fichiers · 24 descriptions en français, 15 en anglais ·
-7 catégories · 2 serveurs MCP · 8 fichiers de configuration.
+7 catégories · 2 serveurs MCP · 5 outils couverts · 10 fichiers de configuration.
 
 ---
 
@@ -165,6 +166,9 @@ cd opencode-skills-MCP
 | **Claude Code** — global | `~/.claude/skills/` |
 | **Claude Code** — projet | `./.claude/skills/` |
 | **Claude Desktop** (mode dev) | bundle `skills-plugin` géré par l'application |
+| **Antigravity** — workspace | `./.agents/skills/` |
+| **Antigravity** — global | `~/.gemini/config/skills/` *(ancien emplacement `~/.gemini/antigravity/skills/` accepté)* |
+| **Antigravity CLI** — global | `~/.gemini/antigravity-cli/skills/` |
 
 > ⚠️ **Un même skill présent à deux endroits** sera chargé selon l'ordre de priorité
 > ci-dessus : le premier trouvé gagne. D'où l'importance de ne **pas** installer deux
@@ -283,7 +287,66 @@ fusionner :
 
 ---
 
-### 4. Vérification
+### 4. Antigravity
+
+[Antigravity](https://antigravity.google) (2.0, l'IDE, ses extensions et la CLI) utilise
+le **standard ouvert** `SKILL.md` : les 39 skills de ce dépôt y fonctionnent **sans
+aucune modification**.
+
+**Skills** — copie ou lien vers l'un des deux emplacements :
+
+```bash
+# Linux / macOS — global (tous les projets)
+mkdir -p ~/.gemini/config/skills
+cp -R skills/* ~/.gemini/config/skills/
+
+# Linux / macOS — workspace (uniquement le projet courant)
+mkdir -p .agents/skills
+cp -R /chemin/vers/opencode-skills-MCP/skills/* .agents/skills/
+```
+
+```powershell
+# Windows (PowerShell) — global
+Copy-Item -Path "skills\*" -Destination "$env:USERPROFILE\.gemini\config\skills" -Recurse -Force
+
+# Windows (PowerShell) — workspace
+Copy-Item -Path "skills\*" -Destination ".agents\skills" -Recurse -Force
+```
+
+> L'ancien emplacement `~/.gemini/antigravity/skills/` reste pris en charge (rétrocompatibilité).
+> Dans l'IDE : panneau agent → **…** → **Customizations** → onglet **Skills** pour inspecter
+> la liste active.
+
+**Règles de routage** — ⚠️ **Antigravity ne lit pas `CLAUDE.md`**. Il lit `AGENTS.md`
+ou `GEMINI.md`, **sans frontmatter YAML** :
+
+```bash
+# Linux / macOS
+cp rules/CLAUDE.global.md ~/.gemini/AGENTS.md
+
+# Windows (PowerShell)
+Copy-Item rules\CLAUDE.global.md "$env:USERPROFILE\.gemini\AGENTS.md"
+```
+
+- **Workspace** : `AGENTS.md` ou `GEMINI.md` à la racine du projet (ou n'importe quel
+  sous-dossier — Antigravity remonte l'arbre).
+- **Global** : `~/.gemini/AGENTS.md`, `~/.gemini/GEMINI.md`, `~/.gemini/config/AGENTS.md`
+  ou `~/.gemini/config/GEMINI.md`.
+- Si `AGENTS.md` et `GEMINI.md` coexistent, **`AGENTS.md` gagne**.
+- Les `.md` placés dans `.agents/rules/` exigent eux un frontmatter YAML avec un
+  `trigger:` valide (`always_on` | `model_decision` | `glob` | `manual`) — un déclencheur
+  absent ou mal orthographié fait **silencieusement** ignorer la règle.
+
+**Serveurs MCP** : voir [`mcp/README.md`](mcp/README.md) (section 5) — fichier
+`~/.gemini/config/mcp_config.json` (global) ou `.agents/mcp_config.json` (workspace).
+
+> **Limites Antigravity** : 24 Ko max par fichier de règle, et 20 000 tokens au total
+> pour l'ensemble des règles `always_on`. Notre fichier global fait 4,7 Ko → largement
+> dans les clous.
+
+---
+
+### 5. Vérification
 
 1. L'outil liste les skills disponibles (opencode : `<available_skills>` ; Claude Code :
    commande `/skills`).
@@ -397,7 +460,7 @@ rm -rf ~/.claude/skills/*
 
 ## Serveurs MCP
 
-Deux serveurs MCP sont fournis, avec **8 fichiers de configuration** (4 cibles × 2
+Deux serveurs MCP sont fournis, avec **10 fichiers de configuration** (5 cibles × 2
 systèmes d'exploitation) :
 
 | Serveur | Apport |
@@ -406,6 +469,7 @@ systèmes d'exploitation) :
 | **`sequential-thinking`** | Raisonnement structuré multi-étapes |
 
 **Cibles couvertes** : opencode · Claude Code · Claude Desktop · Claude Desktop (mode dev)
+· **Antigravity** (2.0 / IDE / extensions / CLI)
 **Systèmes** : Windows (`cmd /c npx …`) et macOS/Linux (`npx …`)
 
 ➡️ **Guide complet, procédure de fusion pas-à-pas et dépannage : [`mcp/README.md`](mcp/README.md)**
@@ -426,6 +490,7 @@ Un skill n'est utile que si l'agent **le choisit**. Le routage repose sur deux l
 | Fichier | À copier vers | Rôle |
 |---|---|---|
 | `rules/CLAUDE.global.md` | `~/.claude/CLAUDE.md` | Table de routage complète (design, 3D/animation, dev) + règles MCP. Lu par opencode **et** Claude Code. |
+| `rules/CLAUDE.global.md` | `~/.gemini/AGENTS.md` | Idem pour **Antigravity** — qui ne lit pas `CLAUDE.md` mais bien `AGENTS.md` (sans frontmatter) |
 | `rules/README.md` | — | Modèle de `CLAUDE.md` projet + instructions d'installation |
 
 Détails et modèle de règles projet : [`rules/README.md`](rules/README.md).
@@ -448,8 +513,9 @@ opencode-skills-MCP/
 │   ├── README.md              ← guide MCP complet
 │   └── configs/
 │       ├── windows/           ← opencode.jsonc, claude-code.json,
-│       │                        claude-desktop.json, claude-desktop-dev.json
-│       └── unix/              ← les mêmes 4, variante macOS/Linux
+│       │                        claude-desktop.json, claude-desktop-dev.json,
+│       │                        antigravity.json
+│       └── unix/              ← les mêmes 5, variante macOS/Linux
 └── rules/
     ├── CLAUDE.global.md       ← table de routage globale
     └── README.md              ← modèle de règles projet

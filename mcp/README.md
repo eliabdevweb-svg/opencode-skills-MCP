@@ -38,6 +38,7 @@ Les fichiers de `configs/` sont des **fragments à fusionner**, pas des fichiers
 | **Claude Code** | — (config unique) | `~/.claude.json` |
 | **Claude Desktop** | `claude_desktop_config.json` | Windows : `%APPDATA%\Claude\claude_desktop_config.json`<br>macOS : `~/Library/Application Support/Claude/claude_desktop_config.json` |
 | **Claude Desktop — mode dev / Cowork** | `claude_desktop_config.json` | Windows : `%LOCALAPPDATA%\Claude-3p\claude_desktop_config.json`<br>*(cible **distincte** — le mode dev ne lit pas le fichier précédent)* |
+| **Antigravity** (2.0 / IDE / CLI) | `mcp_config.json` | Global : `~/.gemini/config/mcp_config.json`<br>Workspace : `<racine>/.agents/mcp_config.json` |
 
 Choisissez la variante correspondant à votre système dans `configs/windows/` ou `configs/unix/`.
 
@@ -150,12 +151,58 @@ Les deux configurations doivent donc être mises à jour **séparément**.
 
 ---
 
+## 5. Antigravity (2.0 / IDE / extensions / CLI)
+
+Fichier : `configs/<os>/antigravity.json`
+
+Antigravity utilise le **même format `mcpServers`** que Claude Desktop.
+
+**Éditeur graphique** (recommandé) :
+
+1. Panneau agent → menu **…** → **MCP Servers** → **Manage MCP Servers**
+2. **View raw config** — ouvre le `mcp_config.json`
+3. Fusionner les blocs `playwright` et `sequential-thinking`
+
+**À la main**, dans `~/.gemini/config/mcp_config.json` (global) :
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp", "--browser", "chrome", "--caps", "vision,devtools", "--allow-unrestricted-file-access"],
+      "env": {}
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "env": {}
+    }
+  }
+}
+```
+
+Notes Antigravity :
+
+- **Portée** : global (`~/.gemini/config/mcp_config.json`) **ou** workspace
+  (`<racine>/.agents/mcp_config.json`). Les deux coexistent ; le workspace l'emporte.
+- **MCP Store** : Antigravity propose un magasin intégré — utile pour découvrir des
+  serveurs, mais un serveur *custom* passe obligatoirement par l'édition du fichier.
+- **Windows** : comme pour les autres cibles, préfixez par `cmd /c`.
+- **Champ distant** : pour un serveur HTTP/SSE, utilisez `"serverUrl"` (les champs
+  legacy `url` / `httpUrl` sont **rejetés**).
+- L'authentification OAuth des serveurs distants est stockée dans
+  `~/.gemini/antigravity/mcp_oauth_tokens.json` — ne pas y toucher à la main.
+
+---
+
 ## Redémarrage obligatoire
 
 **Aucune configuration n'est rechargée à chaud.** Après chaque modification :
 
 - **opencode** — quitter complètement l'application et la relancer
 - **Claude Code** — relancer la session `claude`
+- **Antigravity** — quitter puis relancer l'application (ou recharger la fenêtre)
 - **Claude Desktop** — `Ctrl+Shift+R` (recharger la fenêtre) ou quitter/repartir
 
 ## Vérification
@@ -172,4 +219,6 @@ Les deux configurations doivent donc être mises à jour **séparément**.
 | Serveur en échec sur Windows | `npx` lancé sans `cmd /c` | Utiliser `"command": "cmd", "args": ["/c", "npx", ...]` |
 | Le serveur disparaît après une mise à jour | Le fichier entier a été écrasé | Restaurer le `.bak` et **fusionner** les blocs |
 | Rien ne se passe après modification | Config non rechargée | Redémarrer complètement l'application |
+| Antigravity n'affiche pas le serveur | Mauvais fichier édité (config Claude au lieu de `mcp_config.json`) | Éditer `~/.gemini/config/mcp_config.json` ou `.agents/mcp_config.json` |
+| Antigravity rejette un serveur distant | Champ `url` / `httpUrl` (legacy) | Utiliser `"serverUrl"` |
 | Conflit à `git pull` du dépôt | Clone effectué **dans** le dossier de skills | Voir la section « Éviter les conflits » du README principal |

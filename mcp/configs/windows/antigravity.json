@@ -1,0 +1,28 @@
+{
+  "_note": "A MERGER dans ~/.gemini/config/mcp_config.json (global) ou <racine>/.agents/mcp_config.json (workspace). Conservez la cle \"mcpServers\" existante.",
+  "mcpServers": {
+    "playwright": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "-y",
+        "@playwright/mcp",
+        "--browser",
+        "chrome",
+        "--caps",
+        "vision,devtools",
+        "--allow-unrestricted-file-access"
+      ],
+      "env": {}
+    },
+    "sequential-thinking": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "env": {}
+    }
+  }
+}
