@@ -68,6 +68,12 @@ fournie par l'outil `skill` et **charge le skill correspondant en premier**, pui
 | Choix d'un state management (Redux, Zustand, Context…) | `state-management` |
 | Design system SaaS générique | `saas-design-system` |
 | Architecture de systèmes SaaS (2026) | `saas-system-design` |
+| **Affirmer un fait, citer une source, chiffre, date ou version** | `anti-hallucination` |
+| **Contexte qui gonfle, coût / nombre de tokens, compaction, mémoire d'agent** | `context-engineering` |
+
+> **Avant toute affirmation factuelle** (nom propre, chiffre, date, numéro de version,
+> statistique), charger `anti-hallucination`. Source : guide officiel Anthropic
+> *Reduce hallucinations*. Règle : si la source n'est pas vérifiable, **ne pas citer**.
 
 ## Outils MCP — quand utiliser quoi
 
@@ -75,6 +81,7 @@ fournie par l'outil `skill` et **charge le skill correspondant en premier**, pui
 |---|---|
 | `playwright` (`browser_*`) | **Tout test visuel ou interactif** : navigation, screenshot, snapshot d'accessibilité, console, réseau |
 | `sequential-thinking` | Raisonnement complexe multi-étapes, architecture, arbitrage |
+| `context7` | **Documentation à jour et versionnée** — obligatoire avant d'écrire un code dépendant d'une librairie. Supprime les APIs hallucinées. Invoquer avec *« use context7 »* |
 | `exa` | Recherche web (recherches récentes, documentation) |
 
 ### Protocole de test visuel

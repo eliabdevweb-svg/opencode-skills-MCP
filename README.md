@@ -1,6 +1,6 @@
 # OpenCode Skills & MCP
 
-**39 skills professionnels + configurations MCP** pour [opencode](https://opencode.ai),
+**41 skills professionnels + configurations MCP** pour [opencode](https://opencode.ai),
 **Claude Code** et **Claude Desktop**.
 
 Ce dépôt est une boîte à outils prête à l'emploi : des skills bien documentés, des
@@ -15,7 +15,7 @@ conflits lors des mises à jour**.
 ## Sommaire
 
 - [Ce que contient le dépôt](#ce-que-contient-le-dépôt)
-- [Les 39 skills](#les-39-skills)
+- [Les 41 skills](#les-41-skills)
 - [Installation](#installation)
   - [1. opencode](#1-opencode)
   - [2. Claude Code](#2-claude-code)
@@ -35,18 +35,18 @@ conflits lors des mises à jour**.
 
 | Dossier | Contenu |
 |---|---|
-| `skills/` | Les **39 skills** — chacun dans son propre dossier avec un `SKILL.md` |
+| `skills/` | Les **41 skills** — chacun dans son propre dossier avec un `SKILL.md` |
 | `mcp/` | Configurations MCP (`playwright`, `sequential-thinking`) pour 5 cibles, Windows + macOS/Linux |
 | `rules/` | Fichiers `CLAUDE.md` de **routage automatique** : la table qui dit à l'IA quel skill charger |
 | `README.md` | Ce fichier |
 | `LICENSE` | Licence MIT |
 
-**Chiffres** : 39 skills · 294 fichiers · 24 descriptions en français, 15 en anglais ·
-7 catégories · 2 serveurs MCP · 5 outils couverts · 10 fichiers de configuration.
+**Chiffres** : 41 skills · 296 fichiers · 26 descriptions en français, 15 en anglais ·
+8 catégories · 3 serveurs MCP · 5 outils couverts · 10 fichiers de configuration.
 
 ---
 
-## Les 39 skills
+## Les 41 skills
 
 Chaque skill est autonome : son nom et sa description sont injectés dans le contexte de
 l'agent, qui **choisit le skill adapté** puis charge son `SKILL.md`. C'est pourquoi chaque
@@ -125,6 +125,17 @@ description contient une phrase déclencheuse explicite (« Use when… »).
 |---:|---|---|:--:|
 | 38 | `documentation` | Rédaction de documentation technique : README, docs API, guides, changelogs. | FR |
 | 39 | `slides` | Create strategic HTML presentations with Chart.js, design tokens, responsive layouts... | EN |
+
+### Fiabilité & tokens
+
+Régler les deux défauts systémiques des agents : **l'hallucination** et **la
+consommation de tokens**. Ces deux skills s'appuient sur la documentation officielle
+Anthropic.
+
+| # | Skill | Description | Lang |
+|---:|---|---|:--:|
+| 40 | `anti-hallucination` | Réduction des hallucinations selon les guides officiels Anthropic : permission de ne pas savoir, citations verbatim, vérification par citations, restriction de connaissance externe, chain-of-thought, Best-of-N... | FR |
+| 41 | `context-engineering` | Context engineering et économie de tokens selon Anthropic : attention budget, context rot, compaction, tool-result clearing, structured note-taking, subagents, progressive disclosure, prompt caching... | FR |
 
 ---
 
@@ -275,7 +286,7 @@ Get-ChildItem "$env:LOCALAPPDATA\Claude-3p\local-agent-mode-sessions\skills-plug
   Select-Object -First 1 -ExpandProperty DirectoryName
 ```
 
-Copiez ensuite les 39 dossiers dans le sous-dossier `skills/` de ce bundle.
+Copiez ensuite les 41 dossiers dans le sous-dossier `skills/` de ce bundle.
 
 **Serveurs MCP** — voir [`mcp/README.md`](mcp/README.md) pour les deux fichiers à
 fusionner :
@@ -290,7 +301,7 @@ fusionner :
 ### 4. Antigravity
 
 [Antigravity](https://antigravity.google) (2.0, l'IDE, ses extensions et la CLI) utilise
-le **standard ouvert** `SKILL.md` : les 39 skills de ce dépôt y fonctionnent **sans
+le **standard ouvert** `SKILL.md` : les 41 skills de ce dépôt y fonctionnent **sans
 aucune modification**.
 
 **Skills** — copie ou lien vers l'un des deux emplacements :
@@ -460,13 +471,18 @@ rm -rf ~/.claude/skills/*
 
 ## Serveurs MCP
 
-Deux serveurs MCP sont fournis, avec **10 fichiers de configuration** (5 cibles × 2
+Trois serveurs MCP sont fournis, avec **10 fichiers de configuration** (5 cibles × 2
 systèmes d'exploitation) :
 
-| Serveur | Apport |
-|---|---|
-| **`playwright`** | Tests visuels réels : navigation, captures, snapshot d'accessibilité, console, réseau (~44 outils `browser_*`) |
-| **`sequential-thinking`** | Raisonnement structuré multi-étapes |
+| Serveur | Apport | Rôle |
+|---|---|---|
+| **`playwright`** | Tests visuels réels : navigation, captures, snapshot d'accessibilité, console, réseau (~44 outils `browser_*`) | 🛡️ vérification empirique |
+| **`sequential-thinking`** | Raisonnement structuré multi-étapes | 🛡️ vérification du raisonnement |
+| **`context7`** | Documentation **à jour et versionnée** injectée dans le prompt — supprime les APIs hallucinées et les exemples périmés | 🛡️ **anti-hallucination** |
+
+`context7` n'exige **aucune clé API** pour un usage standard. C'est le serveur MCP le
+plus utilisé de l'écosystème, et l'un des plus économes (~1 200 tokens de schéma pour
+2 outils) — directement utile si vous craignez la charge des schémas MCP.
 
 **Cibles couvertes** : opencode · Claude Code · Claude Desktop · Claude Desktop (mode dev)
 · **Antigravity** (2.0 / IDE / extensions / CLI)
@@ -504,7 +520,7 @@ opencode-skills-MCP/
 ├── README.md                  ← ce fichier
 ├── LICENSE
 ├── .gitattributes
-├── skills/                    ← 39 skills (294 fichiers)
+├── skills/                    ← 41 skills (296 fichiers)
 │   ├── accessibility/SKILL.md
 │   ├── api-design/SKILL.md
 │   ├── …

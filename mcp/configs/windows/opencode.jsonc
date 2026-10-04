@@ -28,6 +28,18 @@
         "@modelcontextprotocol/server-sequential-thinking"
       ],
       "enabled": true
+    },
+    "context7": {
+      "type": "local",
+      "command": [
+        "cmd",
+        "/c",
+        "npx",
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "enabled": true,
+      "timeout": 20000
     }
   }
 }

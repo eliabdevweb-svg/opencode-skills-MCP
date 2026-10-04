@@ -5,6 +5,7 @@
       "command": "cmd",
       "args": [
         "/c",
+        "npx",
         "-y",
         "@playwright/mcp",
         "--browser",
@@ -19,8 +20,19 @@
       "command": "cmd",
       "args": [
         "/c",
+        "npx",
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "env": {}
+    },
+    "context7": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@upstash/context7-mcp"
       ],
       "env": {}
     }
