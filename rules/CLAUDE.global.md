@@ -29,12 +29,15 @@ fournie par l'outil `skill` et **charge le skill correspondant en premier**, pui
 | Accessibilité WCAG 2.1 AA, ARIA, navigation clavier | `accessibility` |
 | Présentations HTML / slides | `slides` (data) ou `design` (habillage) |
 | Bannières réseaux sociaux / print / ads | `banner-design` |
+| Vidéo de lancement à partir du projet ou d’une URL | `brag` (assets fournis) ou `brag-slim` (un seul fichier) |
 
 **Arbitrage en cas de chevauchement** : `ui-ux-pro-max` gagne pour tout ce qui est
 **interface et UX** ; `design` gagne pour tout ce qui est **asset graphique produit** ;
 `ui-styling` gagne dès qu'il s'agit d'**écrire du CSS** ; `admin-shell` gagne pour le
 **layout shell** (sidebar + topbar + panneau de contenu) et `backoffice-design` pour le
-**reste de la back-office** (RBAC, tableaux, états, hiérarchie).
+**reste de la back-office** (RBAC, tableaux, états, hiérarchie) ; `brag` gagne pour une
+**vidéo de lancement** quand ses assets sont installés, sinon `brag-slim` (un seul fichier,
+aucun asset — il cède la main à `brag` si celui-ci est présent).
 
 ## Table de routage — 3D et animation
 
